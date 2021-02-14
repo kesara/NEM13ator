@@ -60,3 +60,17 @@ Run unit tests.
 ```
 python -m unittest discover tests -p "*.py"
 ```
+
+## Running security tests
+
+Install required dependencies for testing.
+
+```
+pip install -r requirements.sec.txt
+```
+
+Run security tests.
+
+```
+bandit -r nem13ator.py nem13ator
+```
