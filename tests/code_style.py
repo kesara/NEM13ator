@@ -8,7 +8,7 @@ class TestCodeStyle(unittest.TestCase):
     def test_pep8_conformance(self):
         '''Test if files follow PEP8 style guide.'''
 
-        paths = ['./nem13ator.py', './nem13ator/', './tests/']
+        paths = ['./nem13ator.py', './nem13ator/', './data', './tests/']
 
         styleguide = pycodestyle.StyleGuide()
         self.assertEqual(styleguide.check_files(paths).total_errors, 0)

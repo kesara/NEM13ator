@@ -18,6 +18,13 @@ Install required dependencies.
 pip install -r requirements.txt
 ```
 
+### Setup database
+By default SQLite database gets created at `data/main.db`.
+
+```
+python data/migrations/db_0000_initial.py
+```
+
 ## Processing NEM13 files
 
 ```
