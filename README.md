@@ -12,12 +12,6 @@ python3.7 -m venv venv
 . venv/bin/activate
 ```
 
-Install required dependencies.
-
-```
-pip install -r requirements.txt
-```
-
 ### Setup database
 By default SQLite database gets created at `data/main.db`.
 
