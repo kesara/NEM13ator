@@ -74,3 +74,13 @@ Run security tests.
 ```
 bandit -r nem13ator.py nem13ator
 ```
+
+## TODO / Improvements
+* Add tests for `datastore.py`.
+* Improve existing tests and use [hypothesis](https://hypothesis.readthedocs.io/).
+* Use [psycopg2](https://www.psycopg.org/) or [SQLAlchemy](https://www.sqlalchemy.org/) with PostreSQL.
+* Use a proper database migration process like [Alembic](https://alembic.sqlalchemy.org/en/latest/).
+* Improve database schema to store additional information.
+* Add the moment, readings are recorded regardless whether they are already
+exists or they are more recent readings for a given register exists in the
+system, this has to be improved.
