@@ -40,15 +40,17 @@ python nem13ator.py tests/data/AEMO556810778013NEM13.csv
 ### Usage
 
 ```
-usage: nem13ator.py [-h] [nem13_file]
+usage: nem13ator.py [-h] [--database [DATABASE]] [nem13_file]
 
 AEMO nem13 file processor
 
 positional arguments:
-  nem13_file  nem13 file path
+  nem13_file            nem13 file path (required)
 
 optional arguments:
-  -h, --help  show this help message and exit
+  -h, --help            show this help message and exit
+  --database [DATABASE]
+                        SQLite database file location (optional)
 ```
 
 ## Running tests

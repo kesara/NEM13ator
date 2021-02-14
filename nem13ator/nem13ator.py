@@ -2,15 +2,23 @@ import csv
 import logging
 import os.path
 
+from nem13ator import datastore
+
 FIELDS = 'RecordIndicator,NMI,NMIConfiguration,RegisterID,NMISuffix,MDMDataStreamIdentifier,MeterSerialNumber,DirectionIndicator,PreviousRegisterRead,PreviousRegisterReadDateTime,PreviousQualityMethod,PreviousReasonCode,PreviousReasonDescription,CurrentRegisterRead,CurrentRegisterReadDateTime,CurrentQualityMethod,CurrentReasonCode,CurrentReasonDescription,Quantity,UOM,NextScheduledReadDate,UpdateDateTime,MSATSLoadDateTime'.split(',')   # noqa
 
 
 class NEM13ator:
     '''AEMO NEM13 file processor'''
 
-    def __init__(self, file_path):
+    def __init__(self, file_path, database):
+        logging.info('Using {} database.'.format(database))
+        self.data_store = datastore.DataStore(
+                database=database,
+                flow_file=file_path)
+
         if os.path.isfile(file_path):
             self.file_path = file_path
+            logging.info('Processing {} flow file.'.format(self.file_path))
         else:
             logging.critical('NEM13 file does not exists')
             raise FileNotFoundError('{} does not exists.'.format(file_path))
@@ -20,10 +28,13 @@ class NEM13ator:
 
         with open(self.file_path) as flow_file:
             reader = csv.reader(flow_file)
-            result = []
+            records = 0
             for row in reader:
-                result.append(self._process_row(row))
-            return result
+                reading = self._process_row(row)
+                if reading:
+                    self.data_store.add_reading(reading)
+                    records += 1
+            return records
 
     def _process_row(self, row):
         '''Process NEM13 file rows'''
